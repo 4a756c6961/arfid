@@ -13,6 +13,21 @@
         android:theme="@style/Theme.ARFID"
         tools:targetApi="31">
         <activity
+            android:name=".ParentActivity"
+            android:exported="false"
+            android:label="@string/title_activity_parent"
+            android:theme="@style/Theme.ARFID" />
+        <activity
+            android:name=".ChildActivity"
+            android:exported="false"
+            android:label="@string/title_activity_child"
+            android:theme="@style/Theme.ARFID" />
+        <activity
+            android:name=".DoctorActivity"
+            android:exported="false"
+            android:label="@string/title_activity_doctor"
+            android:theme="@style/Theme.ARFID" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

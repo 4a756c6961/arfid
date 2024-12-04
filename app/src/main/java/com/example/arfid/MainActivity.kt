@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -26,16 +28,25 @@ class MainActivity : ComponentActivity() {
         setContent {
             ARFIDTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Greeting(
+                            name = "Android"
+                        )
+                        ElevatedCardKind()
+                        ElevatedCardEltern()
+                        ElevatedCardDoctor()
+                    }
                 }
             }
         }
     }
 }
+
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text1(
@@ -43,7 +54,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         modifier = modifier
     )
 }
-
 
 @Composable
 fun ElevatedCardKind() {
@@ -60,8 +70,24 @@ fun ElevatedCardKind() {
                 .padding(16.dp),
             textAlign = TextAlign.Center,
         )
+    }
+}
 
-
+@Composable
+fun ElevatedCardDoctor() {
+    ElevatedCard(
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 6.dp
+        ),
+        modifier = Modifier
+            .size(width = 240.dp, height = 100.dp)
+    ) {
+        Text1(
+            text = stringResource(R.string.informationen_f_r_fachkraefte),
+            modifier = Modifier
+                .padding(16.dp),
+            textAlign = TextAlign.Center,
+        )
     }
 }
 
@@ -80,16 +106,16 @@ fun ElevatedCardEltern() {
                 .padding(16.dp),
             textAlign = TextAlign.Center,
         )
-
-
     }
 }
+
 @Preview(showBackground = true)
 @Composable
-
 fun ElevatedCardPreview() {
     ARFIDTheme {
-        ElevatedCardEltern()
-        ElevatedCardKind()
+        Column {
+            ElevatedCardEltern()
+            ElevatedCardKind()
+        }
     }
 }

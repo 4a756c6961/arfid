@@ -12,14 +12,28 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
 import com.example.arfid.ui.theme.ARFIDTheme
 import androidx.compose.material3.Text as Text1
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.res.stringResource
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.graphics.Color
+
+
+
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,25 +41,31 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ARFIDTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold { innerPadding ->
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(innerPadding),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                            .padding(innerPadding)
                     ) {
-                        Greeting(
-                            name = "Android"
-                        )
-                        ElevatedCardKind()
-                        ElevatedCardEltern()
-                        ElevatedCardDoctor()
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                        ) {
+                            ElevatedCardGreeting()
+                            ElevatedCardKind()
+                            ElevatedCardEltern()
+                            ElevatedCardDoctor()
+                        }
+                        WeiterButton()
                     }
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -54,22 +74,55 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         modifier = modifier
     )
 }
-
 @Composable
-fun ElevatedCardKind() {
+fun ElevatedCardGreeting() {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
         ),
         modifier = Modifier
-            .size(width = 240.dp, height = 100.dp)
+            .fillMaxWidth()
+            .padding(vertical = 16.dp)
+
     ) {
         Text1(
-            text = stringResource(R.string.informationen_f_r_kinder),
+            text = stringResource(R.string.Greeting),
             modifier = Modifier
                 .padding(16.dp),
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Left,
         )
+    }
+}
+
+
+@Composable
+fun ElevatedCardKind() {
+    ElevatedCard(
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            // Headline Text
+            Text1(
+                text = stringResource(R.string.card_kind_headline),
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Medium // Bold font for the headline
+                ),
+                modifier = Modifier.padding(bottom = 8.dp) // Space below the headline
+            )
+
+            // Subheadline Text
+            Text1(
+                text = stringResource(R.string.card_kind_subheadline),
+                style = MaterialTheme.typography.bodyLarge // Regular body style for subheadline
+            )
+        }
     }
 }
 
@@ -80,14 +133,29 @@ fun ElevatedCardDoctor() {
             defaultElevation = 6.dp
         ),
         modifier = Modifier
-            .size(width = 240.dp, height = 100.dp)
+            .fillMaxWidth()
+            .height(100.dp)
     ) {
-        Text1(
-            text = stringResource(R.string.informationen_f_r_fachkraefte),
+        Column(
             modifier = Modifier
-                .padding(16.dp),
-            textAlign = TextAlign.Center,
-        )
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            // Headline Text
+            Text1(
+                text = stringResource(R.string.card_fachkraefte_headline),
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Medium // Bold font for the headline
+                ),
+                modifier = Modifier.padding(bottom = 8.dp) // Space below the headline
+            )
+
+            // Subheadline Text
+            Text1(
+                text = stringResource(R.string.card_fachkraefte_subheadline),
+                style = MaterialTheme.typography.bodyLarge // Regular body style for subheadline
+            )
+        }
     }
 }
 
@@ -98,14 +166,46 @@ fun ElevatedCardEltern() {
             defaultElevation = 6.dp
         ),
         modifier = Modifier
-            .size(width = 240.dp, height = 100.dp)
+            .fillMaxWidth()
+            .height(100.dp)
     ) {
-        Text1(
-            text = stringResource(R.string.informationen_f_r_eltern),
+        Column(
             modifier = Modifier
-                .padding(16.dp),
-            textAlign = TextAlign.Center,
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text1(
+                text = stringResource(R.string.card_eltern_headline),
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Medium // Bold font for the headline
+                ),
+                modifier = Modifier.padding(bottom = 8.dp) // Space below the headline
+            )
+
+            Text1(
+                text = stringResource(R.string.card_eltern_subheadline),
+                style = MaterialTheme.typography.bodyLarge // Regular body style for subheadline
+            )
+        }
+    }
+}
+
+@Composable
+fun WeiterButton() {
+    Button(
+        onClick = {  },
+        enabled = false,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .padding(horizontal = 16.dp),
+        shape = RoundedCornerShape(24.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFFECECEC),
+            contentColor = Color.Gray
         )
+    ) {
+        Text1("Weiter") // Button label
     }
 }
 
@@ -116,6 +216,6 @@ fun ElevatedCardPreview() {
         Column {
             ElevatedCardEltern()
             ElevatedCardKind()
+                }
+            }
         }
-    }
-}

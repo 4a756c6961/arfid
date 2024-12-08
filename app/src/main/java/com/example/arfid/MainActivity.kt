@@ -1,5 +1,4 @@
 package com.example.arfid
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,6 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.res.stringResource
+import android.content.Intent
+import androidx.compose.foundation.clickable
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +49,24 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Composable
+fun ElevatedCardKind(onClick: () -> Unit) {
+    ElevatedCard(
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 6.dp
+        ),
+        modifier = Modifier
+            .size(width = 240.dp, height = 100.dp)
+            .clickable(onClick = onClick) // Hier wird der Click-Listener hinzugefügt
+    ) {
+        Text1(
+            text = stringResource(R.string.informationen_f_r_kinder),
+            modifier = Modifier
+                .padding(16.dp),
+            textAlign = TextAlign.Center,
+        )
+    }
+}
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text1(

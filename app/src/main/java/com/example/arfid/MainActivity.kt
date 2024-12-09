@@ -68,13 +68,6 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text1(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-@Composable
 fun ElevatedCardGreeting() {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(

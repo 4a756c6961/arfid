@@ -1,5 +1,4 @@
 package com.example.arfid
-
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -15,6 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.material3.Icon
+import com.example.arfid.ui.theme.ARFIDTheme
+import androidx.compose.ui.tooling.preview.Preview as Preview1
 
 @Composable
 fun AppNavigation() {
@@ -67,3 +68,4 @@ fun AppNavigation() {
         }
     }
 }
+

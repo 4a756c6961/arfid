@@ -14,13 +14,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.example.arfid.ui.theme.ARFIDTheme
 
 class ParentActivity : ComponentActivity() {
@@ -29,9 +39,7 @@ class ParentActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ARFIDTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ParentScreen()
-                }
+                ParentScreen()
             }
         }
     }
@@ -39,90 +47,112 @@ class ParentActivity : ComponentActivity() {
 
 @Composable
 fun ParentScreen() {
+    val navController = rememberNavController()
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        bottomBar = { ParentBottomNavigationBar(navController) }
+    ) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = "home",
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable("home") { HomeScreen() }
+            composable("wissen") { WissenScreen() }
+            composable("expertensuche") { ExpertensucheScreen() }
+            composable("forum") { ForumScreen() }
+        }
+    }
+}
+
+@Composable
+fun HomeScreen() {
     Column(modifier = Modifier.padding(16.dp)) {
-        ElevatedCardArfidVerstehen()
+        ElevatedCardContent(
+            title = "ARFID verstehen",
+            imageRes = R.drawable.arfid_verstehen
+        )
         Spacer(modifier = Modifier.height(16.dp))
-        ElevatedCardKindUnterstuetzen()
+        ElevatedCardContent(
+            title = "Kind unterstützen",
+            imageRes = R.drawable.kind_unterstuetzen
+        )
         Spacer(modifier = Modifier.height(16.dp))
-        ElevatedCardErfahrungsberichte()
+        ElevatedCardContent(
+            title = "Erfahrungsberichte",
+            imageRes = R.drawable.erfahrungsberichte
+        )
     }
 }
 
 @Composable
-fun ElevatedCardArfidVerstehen() {
+fun ElevatedCardContent(title: String, imageRes: Int) {
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 20.dp, start = 5.dp, end = 5.dp),
+            .padding(horizontal = 5.dp),
         colors = CardDefaults.elevatedCardColors(
             containerColor = Color.White
         )
     ) {
         Column(
-            modifier = Modifier.padding(5.dp)
+            modifier = Modifier.padding(8.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.arfid_verstehen),
-                contentDescription = "ARFID verstehen",
+                painter = painterResource(id = imageRes),
+                contentDescription = title,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
             )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = title, style = MaterialTheme.typography.bodyLarge)
         }
     }
 }
 
 @Composable
-fun ElevatedCardKindUnterstuetzen() {
-    ElevatedCard(
-        elevation = CardDefaults.cardElevation( // Hier wird die elevation korrekt gesetzt
-            defaultElevation = 6.dp // Beispielhöhe
-        ),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 20.dp, start = 5.dp, end = 5.dp),
-        colors = CardDefaults.elevatedCardColors(
-            containerColor = Color.White
-        )
-    ) {
-        Column(
-            modifier = Modifier.padding(5.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.kind_unterstuetzen),
-                contentDescription = "Kind unterstützen",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
+fun ParentBottomNavigationBar(navController: NavController) {
+    val navItems = listOf(
+        ParentNavItem("home", "Home", R.drawable.ic_home),
+        ParentNavItem("wissen", "Wissen", R.drawable.ic_wissen),
+        ParentNavItem("expertensuche", "Experten", R.drawable.ic_suche),
+        ParentNavItem("forum", "Forum", R.drawable.ic_forum)
+    )
+
+    NavigationBar {
+        val currentBackStackEntry = navController.currentBackStackEntryAsState().value
+        val currentRoute = currentBackStackEntry?.destination?.route
+
+        navItems.forEach { item ->
+            NavigationBarItem(
+                selected = currentRoute == item.route,
+                onClick = {
+                    navController.navigate(item.route) {
+                        popUpTo(navController.graph.startDestinationId) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+                icon = {
+                    Icon(
+                        painter = painterResource(id = item.iconId),
+                        contentDescription = item.label,
+                        modifier = Modifier.size(24.dp)
+                    )
+                },
+                label = { Text(text = item.label) }
             )
         }
     }
 }
 
-@Composable
-fun ElevatedCardErfahrungsberichte() {
-    ElevatedCard(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 20.dp, start = 5.dp, end = 5.dp),
-        colors = CardDefaults.elevatedCardColors(
-            containerColor = Color.White
-        ),
-
-    ) {
-        Column(
-            modifier = Modifier.padding(5.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.erfahrungsberichte),
-                contentDescription = "ARFID verstehen",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            )
-        }
-    }
-}
+data class ParentNavItem(
+    val route: String,
+    val label: String,
+    val iconId: Int
+)
 
 @Preview(showBackground = true)
 @Composable

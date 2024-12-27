@@ -15,12 +15,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.arfid.ui.theme.ARFIDTheme
@@ -55,20 +53,20 @@ fun ElevatedCardArfidVerstehen() {
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(5.dp),
+            .padding(top = 20.dp, start = 5.dp, end = 5.dp),
         colors = CardDefaults.elevatedCardColors(
             containerColor = Color.White
         )
     ) {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(5.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.arfid_verstehen),
                 contentDescription = "ARFID verstehen",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(300.dp)
+                    .height(200.dp)
             )
         }
     }
@@ -77,36 +75,52 @@ fun ElevatedCardArfidVerstehen() {
 @Composable
 fun ElevatedCardKindUnterstuetzen() {
     ElevatedCard(
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
+        elevation = CardDefaults.cardElevation( // Hier wird die elevation korrekt gesetzt
+            defaultElevation = 6.dp // Beispielhöhe
         ),
         modifier = Modifier
-            .size(width = 240.dp, height = 100.dp)
-    ) {
-        Text(
-            text = "Elevated",
-            modifier = Modifier
-                .padding(16.dp),
-            textAlign = TextAlign.Center,
+            .fillMaxWidth()
+            .padding(top = 20.dp, start = 5.dp, end = 5.dp),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = Color.White
         )
+    ) {
+        Column(
+            modifier = Modifier.padding(5.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.kind_unterstuetzen),
+                contentDescription = "Kind unterstützen",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+            )
+        }
     }
 }
 
 @Composable
 fun ElevatedCardErfahrungsberichte() {
     ElevatedCard(
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
-        ),
         modifier = Modifier
-            .size(width = 240.dp, height = 100.dp)
+            .fillMaxWidth()
+            .padding(top = 20.dp, start = 5.dp, end = 5.dp),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = Color.White
+        ),
+
     ) {
-        Text(
-            text = "Elevated",
-            modifier = Modifier
-                .padding(16.dp),
-            textAlign = TextAlign.Center,
-        )
+        Column(
+            modifier = Modifier.padding(5.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.erfahrungsberichte),
+                contentDescription = "ARFID verstehen",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+            )
+        }
     }
 }
 

@@ -22,4 +22,35 @@
     <string name="card_kind_subheadline">Ich bin selbst von ARFID betroffen.</string>
     <string name="Greeting">Greeting</string>
 
+    <!-- Bereich ARFID verstehen -->
+
+    <!-- Titel -->
+    <string name="title_Slide_1">Was ist ARFID?</string>
+    <string name="title_Slide_2">Symptome erkennen</string>
+
+    <!-- Beschreibungen -->
+    <string name="content_Slide_1">
+        ARFID steht für Avoidant/Restrictive Food Intake Disorder und ist eine Essstörung, die vor allem Kinder betrifft.
+        Vielleicht haben Sie bemerkt, dass Ihr Kind bestimmte Lebensmittel ablehnt oder nur eine sehr eingeschränkte Auswahl an Speisen isst.
+        Anders als bei anderen Essstörungen wie Anorexie geht es bei ARFID nicht um das Gewicht oder die Figur.
+        Stattdessen können Ängste, sensorische Empfindlichkeiten oder ein mangelndes Interesse am Essen die Ursache sein.
+        Wenn Essen zu einem täglichen Kampf wird und Sie merken, dass Ihr Kind unter diesem Verhalten leidet,
+        ist es wichtig, ARFID besser zu verstehen.
+        Mit der richtigen Unterstützung können Sie Ihrem Kind helfen, diese Herausforderung zu bewältigen.
+    </string>
+    <string name="content_Slide_2">
+        Es ist normal, dass Kinder manchmal wählerisch beim Essen sind. Aber wie können Sie erkennen, ob das Verhalten Ihres Kindes auf ARFID hinweist? Achten Sie auf diese Anzeichen:
+
+        • Ihr Kind isst nur eine kleine Auswahl an Lebensmitteln. Vielleicht isst Ihr Kind immer dieselben Gerichte, wie trockene Nudeln, Toast oder bestimmte Snacks, und weigert sich, Neues zu probieren.
+
+        • Ihr Kind zeigt starke Ablehnung gegenüber bestimmten Lebensmitteln. Konsistenzen, Farben oder Gerüche können bei Ihrem Kind Ekel oder sogar Angst auslösen.
+
+        • Ihr Kind meidet Mahlzeiten in sozialen Situationen. Es möchte vielleicht nicht bei Familienessen oder Geburtstagen teilnehmen, weil es sich beim Essen unwohl fühlt.
+
+        • Körperliche Veränderungen sind sichtbar. Sie bemerken, dass Ihr Kind an Gewicht verliert, langsamer wächst oder Nahrungsergänzungsmittel benötigt.
+
+        Wenn Sie sich in diesen Punkten wiedererkennen, könnte ARFID die Ursache sein. Je früher Sie handeln, desto besser können Sie Ihrem Kind helfen.
+    </string>
+
+
 </resources>

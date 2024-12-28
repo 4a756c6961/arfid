@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,6 +33,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.arfid.ui.theme.ARFIDTheme
+import android.content.Intent
+
 
 
 class ParentActivity : ComponentActivity() {
@@ -68,21 +72,25 @@ fun ParentScreen() {
 
 @Composable
 fun ParentHomeScreen() {
+    val context = LocalContext.current
     Column(modifier = Modifier.padding(16.dp)) {
-        ElevatedCardContent(imageRes = R.drawable.arfid_verstehen)
+        ElevatedCardContent(imageRes = R.drawable.arfid_verstehen, onClick = { // NEU: Klick-Aktion für die erste Karte
+            val intent = Intent(context, AbschnittArfidVerstehen::class.java) // NEU
+            context.startActivity(intent)})
         Spacer(modifier = Modifier.height(16.dp))
-        ElevatedCardContent(imageRes = R.drawable.kind_unterstuetzen)
+        ElevatedCardContent(imageRes = R.drawable.kind_unterstuetzen, onClick = {})
         Spacer(modifier = Modifier.height(16.dp))
-        ElevatedCardContent(imageRes = R.drawable.erfahrungsberichte)
+        ElevatedCardContent(imageRes = R.drawable.erfahrungsberichte, onClick = {})
     }
 }
 
 @Composable
-fun ElevatedCardContent(imageRes: Int) {
+fun ElevatedCardContent(imageRes: Int, onClick: () -> Unit) {
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 5.dp),
+            .padding(horizontal = 5.dp)
+            .clickable { onClick() },
         colors = CardDefaults.elevatedCardColors(
             containerColor = Color.White
         )

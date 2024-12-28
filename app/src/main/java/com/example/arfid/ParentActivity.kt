@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -32,6 +31,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.arfid.ui.theme.ARFIDTheme
+
 
 class ParentActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +58,7 @@ fun ParentScreen() {
             startDestination = "home",
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable("home") { HomeScreen() }
+            composable("home") { ParentHomeScreen() }
             composable("wissen") { WissenScreen() }
             composable("expertensuche") { ExpertensucheScreen() }
             composable("forum") { ForumScreen() }
@@ -67,27 +67,18 @@ fun ParentScreen() {
 }
 
 @Composable
-fun HomeScreen() {
+fun ParentHomeScreen() {
     Column(modifier = Modifier.padding(16.dp)) {
-        ElevatedCardContent(
-            title = "ARFID verstehen",
-            imageRes = R.drawable.arfid_verstehen
-        )
+        ElevatedCardContent(imageRes = R.drawable.arfid_verstehen)
         Spacer(modifier = Modifier.height(16.dp))
-        ElevatedCardContent(
-            title = "Kind unterstützen",
-            imageRes = R.drawable.kind_unterstuetzen
-        )
+        ElevatedCardContent(imageRes = R.drawable.kind_unterstuetzen)
         Spacer(modifier = Modifier.height(16.dp))
-        ElevatedCardContent(
-            title = "Erfahrungsberichte",
-            imageRes = R.drawable.erfahrungsberichte
-        )
+        ElevatedCardContent(imageRes = R.drawable.erfahrungsberichte)
     }
 }
 
 @Composable
-fun ElevatedCardContent(title: String, imageRes: Int) {
+fun ElevatedCardContent(imageRes: Int) {
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
@@ -101,13 +92,13 @@ fun ElevatedCardContent(title: String, imageRes: Int) {
         ) {
             Image(
                 painter = painterResource(id = imageRes),
-                contentDescription = title,
+                contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = title, style = MaterialTheme.typography.bodyLarge)
+
         }
     }
 }
@@ -138,7 +129,7 @@ fun ParentBottomNavigationBar(navController: NavController) {
                 icon = {
                     Icon(
                         painter = painterResource(id = item.iconId),
-                        contentDescription = item.label,
+                        contentDescription = null,
                         modifier = Modifier.size(24.dp)
                     )
                 },

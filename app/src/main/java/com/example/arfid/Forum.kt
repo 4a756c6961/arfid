@@ -16,7 +16,7 @@ fun ForumScreen() {
     Box(modifier = Modifier
         .fillMaxSize(),
         contentAlignment = Alignment.Center){
-        Text(text = "Wissen",
+        Text(text = "ARFID Forum",
             fontFamily = FontFamily.SansSerif,
             fontSize = 30.sp)
     }

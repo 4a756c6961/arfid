@@ -16,7 +16,7 @@ fun ExpertensucheScreen() {
     Box(modifier = Modifier
         .fillMaxSize(),
         contentAlignment = Alignment.Center){
-        Text(text = "Wissen",
+        Text(text = "Experten suchen",
             fontFamily = FontFamily.SansSerif,
             fontSize = 30.sp)
     }

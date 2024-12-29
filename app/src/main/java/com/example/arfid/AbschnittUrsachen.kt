@@ -23,21 +23,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
-class AbschnittSymptomeErkennen : ComponentActivity() {
+class AbschnittUrsachen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ARFIDTheme {
-                AbschnittSymptomeErkennenScreen(context = this)
+                AbschnittUrsachenScreen(context = this)
             }
         }
     }
 }
 
+
 @Composable
-fun AbschnittSymptomeErkennenScreen(context: Context) {
+fun AbschnittUrsachenScreen(context: Context) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -100,14 +102,37 @@ fun AbschnittSymptomeErkennenScreen(context: Context) {
                 )
 
                 Text(
-                    text = stringResource(id = R.string.title_Slide_2),
+                    text = stringResource(id = R.string.title_slide_3),
                     style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.padding(16.dp)
                 )
+
                 Text(
-                    text = stringResource(id = R.string.content_Slide_2),
+                    text = stringResource(id = R.string.content_slide_3_intro),
+                    style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
+
+                Text(
+                    text = stringResource(id = R.string.content_slide_3_bullet_point_1),
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                Text(
+                    text = stringResource(id = R.string.content_slide_3_bullet_point_2),
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(16.dp)
+                )
+                Text(
+                    text = stringResource(id = R.string.content_slide_3_bullet_point_3),
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+
+                Text(
+                    text = stringResource(id = R.string.content_slide_3_Abschluss),
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(16.dp))
             }
 
             Box(
@@ -124,7 +149,7 @@ fun AbschnittSymptomeErkennenScreen(context: Context) {
                 ) {
                     OutlinedButton(
                         onClick = {
-                            val intent = Intent(context, AbschnittArfidVerstehen::class.java)
+                            val intent = Intent(context, AbschnittSymptomeErkennen::class.java)
                             context.startActivity(intent)
                         },
                         modifier = Modifier
@@ -142,7 +167,7 @@ fun AbschnittSymptomeErkennenScreen(context: Context) {
 
                     Button(
                         onClick = {
-                            val intent = Intent(context, AbschnittUrsachen::class.java)
+                            val intent = Intent(context, AbschnittHandeln::class.java)
                             context.startActivity(intent)
                         },
                         modifier = Modifier

@@ -1,6 +1,9 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 package com.example.arfid
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,37 +14,39 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 class AbschnittArfidVerstehen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ARFIDTheme {
-                AbschnittArfidVerstehenScreen()
+                AbschnittArfidVerstehenScreen(context = this)
             }
         }
     }
 }
 
 @Composable
-fun AbschnittArfidVerstehenScreen() {
+fun AbschnittArfidVerstehenScreen(context: Context) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                    // Leere Box, da der Titel nicht benötigt wird (wie im Screenshot)
-                },
+                title = { },
                 navigationIcon = {
-                    IconButton(onClick = { /* Aktion für Schließen */ }) {
+                    val context = LocalContext.current
+                    IconButton(onClick = {
+
+                        if (context is Activity) {
+                            context.finish()
+                        }
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_close),
                             contentDescription = "Schließen"
@@ -49,7 +54,15 @@ fun AbschnittArfidVerstehenScreen() {
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /* Aktion für Teilen */ }) {
+                    val context = LocalContext.current
+                    IconButton(onClick = {
+                        val shareIntent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_TEXT, "Ich möchte eine Info über ARFID teilen")
+                            type = "text/plain"
+                        }
+                        context.startActivity(Intent.createChooser(shareIntent, "Share via"))
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_share),
                             contentDescription = "Teilen"
@@ -57,10 +70,12 @@ fun AbschnittArfidVerstehenScreen() {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFFB4D1D1),
+                    containerColor = Color(0xFFB4D1D1)
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
+
+
         }
     ) { innerPadding ->
         Column(
@@ -71,23 +86,24 @@ fun AbschnittArfidVerstehenScreen() {
         ) {
             // Bild oben
             Image(
-                painter = painterResource(id = R.drawable.header_arfid_verstehen), // Header-Bild
+                painter = painterResource(id = R.drawable.header_arfid_verstehen),
                 contentDescription = "ARFID verstehen",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(16f / 12f),
+                    .aspectRatio(16f / 10f),
                         contentScale = ContentScale.Crop
             )
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp) // Padding an den Seiten
+                    .padding(horizontal = 16.dp)
             ) {
                 Text(
                     text = stringResource(id = R.string.title_Slide_1),
                     style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.padding(top = 16.dp, bottom = 8.dp) // Optional: zusätzliches Padding oben/unten
+                    modifier = Modifier
+                        .padding(vertical = 16.dp)
                 )
                 Text(
                     text = stringResource(id = R.string.content_Slide_1)
@@ -105,6 +121,7 @@ fun AbschnittArfidVerstehenScreen() {
             ) {
                 Button(
                     onClick = { /* Zurück-Aktion */ },
+                    enabled = false,
                     modifier = Modifier
                         .weight(1f)
                         .padding(end = 8.dp),
@@ -118,17 +135,17 @@ fun AbschnittArfidVerstehenScreen() {
                 }
 
                 Button(
-                    onClick = { /* Weiter-Aktion */ },
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(start = 8.dp),
+                    onClick = {
+                        val intent = Intent(context, AbschnittSymptomeErkennen::class.java)
+                        context.startActivity(intent)
+                    },
+                   modifier = Modifier.weight(1f),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFFFF7350),
                         contentColor = Color.White
-                    ),
-                    shape = RoundedCornerShape(100.dp)
+                    )
                 ) {
-                    Text(text = "Weiter")
+                    Text("Weiter")
                 }
             }
         }

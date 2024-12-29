@@ -27,6 +27,8 @@
     <!-- Titel -->
     <string name="title_Slide_1">Was ist ARFID?</string>
     <string name="title_Slide_2">Symptome erkennen</string>
+    <string name="title_slide_3">Was ist die Ursache von ARFID</string>
+    <string name="title_slide_4">Warum ist es wichtig, frühzeitig zu handeln?</string>
 
     <!-- Beschreibungen -->
     <string name="content_Slide_1">
@@ -50,6 +52,30 @@
         • Körperliche Veränderungen sind sichtbar. Sie bemerken, dass Ihr Kind an Gewicht verliert, langsamer wächst oder Nahrungsergänzungsmittel benötigt.
 
         Wenn Sie sich in diesen Punkten wiedererkennen, könnte ARFID die Ursache sein. Je früher Sie handeln, desto besser können Sie Ihrem Kind helfen.
+    </string>
+    <string name="content_slide_3_intro">
+        Vielleicht fragen Sie sich, warum Ihr Kind ein solches Essverhalten entwickelt hat. ARFID entsteht oft durch eine Kombination aus verschiedenen Faktoren:
+    </string>
+    <string name="content_slide_3_bullet_point_1">- Sensorische Empfindlichkeiten: Ihr Kind reagiert möglicherweise sehr empfindlich auf den Geschmack, die Konsistenz oder den Geruch bestimmter Lebensmittel. Das kann dazu führen, dass es diese komplett meidet.</string>
+    <string name="content_slide_3_bullet_point_2">- Negative Erfahrungen beim Essen: Vielleicht hat Ihr Kind sich einmal an einem Lebensmittel verschluckt oder musste erbrechen. Solche Erfahrungen können Ängste auslösen, die dauerhaft das Essverhalten beeinflussen.</string>
+    <string name="content_slide_3_bullet_point_3">- Geringes Interesse am Essen: Manche Kinder haben wenig Hunger oder scheinen das Essen „zu vergessen“. Das kann ein Zeichen für ARFID sein.</string>
+    <string name="content_slide_3_Abschluss">
+        Wichtig ist: Diese Ursachen sind keine Schuld der Eltern oder des Kindes. Es handelt sich um eine Essstörung, die Verständnis und Unterstützung braucht.
+    </string>
+       <string name="content_slide_4_intro">
+        Unbehandeltes ARFID kann langfristige Folgen haben, wie:
+    </string>
+    <string name="content_slide_4_bullet_point_1">
+        - Nährstoffmangel, der die Gesundheit und das Wachstum Ihres Kindes beeinträchtigen kann.
+    </string>
+    <string name="content_slide_4_bullet_point_2">
+        - Soziale Isolation, weil Ihr Kind Esssituationen meidet.
+    </string>
+    <string name="content_slide_4_bullet_point_3">
+        - Stress in der Familie, wenn Mahlzeiten zu einem täglichen Konflikt werden.
+    </string>
+    <string name="content_slide_4_Abschluss">
+        Aber es gibt gute Nachrichten: Mit der richtigen Unterstützung können Kinder lernen, ihre Ängste zu überwinden und ein gesundes Essverhalten zu entwickeln. In der Section „Ihr Kind unterstützen“ finden Sie praktische Tipps, um loszulegen.
     </string>
 
 

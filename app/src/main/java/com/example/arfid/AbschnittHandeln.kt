@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 class AbschnittHandeln : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,6 +134,37 @@ fun AbschnittHandelnScreen(context: Context) {
                     text = stringResource(id = R.string.content_slide_4_Abschluss),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(16.dp))
+
+
+                Button(
+                    onClick = {
+                     // Platzhalter
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .padding(horizontal = 16.dp, vertical = 16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFEFEFEF),
+                        contentColor = Color(0xFF004D40)
+                    ),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_suche),
+                            contentDescription = "Zur Expertensuche",
+                            modifier = Modifier.size(32.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Zur Experten-Suche",
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp))
+                    }
+                }
             }
 
             Box(
@@ -167,7 +199,7 @@ fun AbschnittHandelnScreen(context: Context) {
 
                     Button(
                         onClick = {
-                            val intent = Intent(context, AbschnittSymptomeErkennen::class.java)
+                            val intent = Intent(context, ParentActivity::class.java)
                             context.startActivity(intent)
                         },
                         modifier = Modifier
@@ -178,7 +210,7 @@ fun AbschnittHandelnScreen(context: Context) {
                             contentColor = Color.White
                         )
                     ) {
-                        Text("Weiter")
+                        Text("Schließen")
                     }
                 }
             }

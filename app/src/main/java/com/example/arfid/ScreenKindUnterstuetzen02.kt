@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import com.example.arfid.ui.theme.ARFIDTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,23 +21,54 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.core.content.FileProvider
+import java.io.File
+import java.io.FileOutputStream
 
-class ScreenKindUnterstuetzen01 : ComponentActivity() {
+fun openPdfFromRawCheckliste(context: Context) {
+    val pdfFile = File(context.cacheDir, "Checkliste.pdf")
+    if (!pdfFile.exists()) {
+        // Copy PDF from raw resources to cache
+        context.resources.openRawResource(R.raw.checkliste).use { input ->
+            FileOutputStream(pdfFile).use { output ->
+                input.copyTo(output)
+            }
+        }
+    }
+
+    val pdfUri = FileProvider.getUriForFile(context, "${context.packageName}.provider", pdfFile)
+
+    val intent = Intent(Intent.ACTION_VIEW).apply {
+        setDataAndType(pdfUri, "application/pdf")
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    }
+
+    try {
+        context.startActivity(intent)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+class ScreenKindUnterstuetzen02 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ARFIDTheme {
-                ScreenKindUnterstuetzen01(context = this)
+                ScreenKindUnterstuetzen02Content()
             }
         }
     }
 }
 
 @Composable
-fun ScreenKindUnterstuetzen01 (context: Context) {
+fun ScreenKindUnterstuetzen02Content() {
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             TopAppBar(
@@ -99,35 +131,58 @@ fun ScreenKindUnterstuetzen01 (context: Context) {
                 )
 
                 Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_title_Slide_1),
+                    text = stringResource(id = R.string.kind_unterstuetzen_title_Slide_2),
                     style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.padding(16.dp)
                 )
                 Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_slide_1_intro),
+                    text = stringResource(id = R.string.kind_unterstuetzen_slide_2_intro),
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
                 Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_slide_1_bullet_point_1),
+                    text = stringResource(id = R.string.kind_unterstuetzen_slide_2_bullet_point_1),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
                 Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_slide_1_bullet_point_2),
+                    text = stringResource(id = R.string.kind_unterstuetzen_slide_2_bullet_point_2),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(16.dp)
                 )
                 Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_slide_1_bullet_point_3),
+                    text = stringResource(id = R.string.kind_unterstuetzen_slide_2_bullet_point_3),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
 
-                Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_slide_1_conclusion),
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(16.dp)
-                )
+                Button(
+                    onClick = { openPdfFromRawCheckliste(context) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .padding(horizontal = 16.dp, vertical = 16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFEFEFEF),
+                        contentColor = Color(0xFF004D40)
+                    ),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_download),
+                            contentDescription = "Download PDF",
+                            modifier = Modifier.size(32.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Checkliste herunterladen",
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp)
+                        )
+                    }
+                }
 
 
             }
@@ -144,16 +199,19 @@ fun ScreenKindUnterstuetzen01 (context: Context) {
                         .padding(vertical = 16.dp, horizontal = 16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Button(
-                        onClick = { /* Zurück-Aktion */ },
-                        enabled = false,
+                    OutlinedButton(
+                        onClick = {
+                            val intent = Intent(context, ScreenKindUnterstuetzen01::class.java)
+                            context.startActivity(intent)
+                        },
                         modifier = Modifier
                             .weight(1f)
                             .padding(end = 8.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFECECEC),
-                            contentColor = Color.Gray
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            containerColor = Color(0xFFFFFFFF),
+                            contentColor = Color(0xFFFF7350)
                         ),
+                        border = BorderStroke(2.dp, Color(0xFFFF7350)),
                         shape = RoundedCornerShape(100.dp)
                     ) {
                         Text(text = "Zurück")
@@ -161,7 +219,7 @@ fun ScreenKindUnterstuetzen01 (context: Context) {
 
                     Button(
                         onClick = {
-                            val intent = Intent(context, ScreenKindUnterstuetzen02::class.java)
+                            val intent = Intent(context, ScreenKindUnterstuetzen03::class.java)
                             context.startActivity(intent)
                         },
                         modifier = Modifier

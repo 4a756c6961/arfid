@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import com.example.arfid.ui.theme.ARFIDTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,20 +24,21 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
-class ScreenKindUnterstuetzen01 : ComponentActivity() {
+class ScreenKindUnterstuetzen05 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ARFIDTheme {
-                ScreenKindUnterstuetzen01(context = this)
+                ScreenKindUnterstuetzen05(context = this)
             }
         }
     }
 }
 
 @Composable
-fun ScreenKindUnterstuetzen01 (context: Context) {
+fun ScreenKindUnterstuetzen05 (context: Context) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -99,38 +101,56 @@ fun ScreenKindUnterstuetzen01 (context: Context) {
                 )
 
                 Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_title_Slide_1),
+                    text = stringResource(id = R.string.kind_unterstuetzen_title_Slide_5),
                     style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.padding(16.dp)
                 )
                 Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_slide_1_intro),
+                    text = stringResource(id = R.string.kind_unterstuetzen_slide_5_intro),
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
                 Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_slide_1_bullet_point_1),
+                    text = stringResource(id = R.string.kind_unterstuetzen_slide_5_bullet_point_1),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
                 Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_slide_1_bullet_point_2),
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(16.dp)
-                )
-                Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_slide_1_bullet_point_3),
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
-
-                Text(
-                    text = stringResource(id = R.string.kind_unterstuetzen_slide_1_conclusion),
+                    text = stringResource(id = R.string.kind_unterstuetzen_slide_5_bullet_point_2),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(16.dp)
                 )
 
-
+                Button(
+                    onClick = {
+                        // Platzhalter
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .padding(horizontal = 16.dp, vertical = 16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFEFEFEF),
+                        contentColor = Color(0xFF004D40)
+                    ),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_suche),
+                            contentDescription = "Zur Expertensuche",
+                            modifier = Modifier.size(32.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Zur Experten-Suche",
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp))
+                    }
+                }
             }
+
 
             Box(
                 modifier = Modifier
@@ -144,16 +164,19 @@ fun ScreenKindUnterstuetzen01 (context: Context) {
                         .padding(vertical = 16.dp, horizontal = 16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Button(
-                        onClick = { /* Zurück-Aktion */ },
-                        enabled = false,
+                    OutlinedButton(
+                        onClick = {
+                            val intent = Intent(context, ScreenKindUnterstuetzen04::class.java)
+                            context.startActivity(intent)
+                        },
                         modifier = Modifier
                             .weight(1f)
                             .padding(end = 8.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFECECEC),
-                            contentColor = Color.Gray
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            containerColor = Color(0xFFFFFFFF),
+                            contentColor = Color(0xFFFF7350)
                         ),
+                        border = BorderStroke(2.dp, Color(0xFFFF7350)),
                         shape = RoundedCornerShape(100.dp)
                     ) {
                         Text(text = "Zurück")
@@ -161,7 +184,7 @@ fun ScreenKindUnterstuetzen01 (context: Context) {
 
                     Button(
                         onClick = {
-                            val intent = Intent(context, ScreenKindUnterstuetzen02::class.java)
+                            val intent = Intent(context, ScreenKindUnterstuetzen06::class.java)
                             context.startActivity(intent)
                         },
                         modifier = Modifier

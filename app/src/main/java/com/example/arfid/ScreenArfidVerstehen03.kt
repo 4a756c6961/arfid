@@ -23,15 +23,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
-class AbschnittUrsachen : ComponentActivity() {
+class ScreenArfidVerstehen03 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ARFIDTheme {
-                AbschnittUrsachenScreen(context = this)
+                ScreenArfidVerstehen03(context = this)
             }
         }
     }
@@ -39,7 +38,7 @@ class AbschnittUrsachen : ComponentActivity() {
 
 
 @Composable
-fun AbschnittUrsachenScreen(context: Context) {
+fun ScreenArfidVerstehen03(context: Context) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -149,7 +148,7 @@ fun AbschnittUrsachenScreen(context: Context) {
                 ) {
                     OutlinedButton(
                         onClick = {
-                            val intent = Intent(context, AbschnittSymptomeErkennen::class.java)
+                            val intent = Intent(context, ScreenArfidVerstehen02::class.java)
                             context.startActivity(intent)
                         },
                         modifier = Modifier
@@ -167,7 +166,7 @@ fun AbschnittUrsachenScreen(context: Context) {
 
                     Button(
                         onClick = {
-                            val intent = Intent(context, AbschnittHandeln::class.java)
+                            val intent = Intent(context, ScreenArfidVerstehen04::class.java)
                             context.startActivity(intent)
                         },
                         modifier = Modifier

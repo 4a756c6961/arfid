@@ -91,7 +91,7 @@ fun ParentHomeScreen() {
             title = stringResource(id = R.string.title_arfid_verstehen),
             subtitle = stringResource(id = R.string.subtitle_arfid_verstehen),
             onClick = {
-            val intent = Intent(context, AbschnittArfidVerstehen::class.java)
+            val intent = Intent(context, ScreenArfidVerstehen01::class.java)
             context.startActivity(intent)})
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -99,7 +99,8 @@ fun ParentHomeScreen() {
             imageRes = R.drawable.kind_unterstuetzen,
             title = stringResource(id = R.string.title_kind_unterstuetzen),
             subtitle = stringResource(id = R.string.subtitle_kind_unterstuetzen),
-            onClick = {})
+            onClick = {val intent = Intent(context, ScreenKindUnterstuetzen01::class.java)
+                context.startActivity(intent)})
 
         Spacer(modifier = Modifier.height(16.dp))
         ElevatedCardContent(

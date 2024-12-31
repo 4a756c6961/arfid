@@ -16,10 +16,11 @@
         android:theme="@style/Theme.ARFID"
         tools:targetApi="31" >
 
-        <activity android:name=".AbschnittArfidVerstehen" />
-        <activity android:name=".AbschnittSymptomeErkennen" />
-        <activity android:name=".AbschnittUrsachen" />
-        <activity android:name=".AbschnittHandeln" />
+        <activity android:name=".ScreenArfidVerstehen01" />
+        <activity android:name=".ScreenArfidVerstehen02" />
+        <activity android:name=".ScreenArfidVerstehen03" />
+        <activity android:name=".ScreenArfidVerstehen04" />
+        <activity android:name=".ScreenKindUnterstuetzen01" />
 
         <activity
             android:name=".ParentActivity"

@@ -88,4 +88,20 @@
     </string>
 
 
-</resources>
+    <!-- Bereich Kind unterstuetzen -->
+
+    <!-- Titel -->
+
+<string name="kind_unterstuetzen_title_Slide_1">Wie können Sie Ihrem Kind helfen?</string>
+
+    <!-- Beschreibungen -->
+
+    <string name="kind_unterstuetzen_slide_1_intro">
+        Das Essverhalten eines Kindes mit ARFID zu ändern, braucht Zeit, Geduld und Einfühlungsvermögen. Aber Sie können eine entscheidende Rolle spielen, indem Sie:
+    </string>
+    <string name="kind_unterstuetzen_slide_1_intro_bullet_point_1">- Eine stressfreie Atmosphäre bei Mahlzeiten schaffen.</string>
+    <string name="kind_unterstuetzen_slide_1_intro_bullet_point_2">- Ihr Kind ermutigen, ohne Druck auszuüben.</string>
+    <string name="kind_unterstuetzen_slide_1_intro_bullet_point_3">- Gemeinsam mit Fachkräften kleine Ziele setzen.</string>
+    <string name="kind_unterstuetzen_slide_1_conclusion">Starten Sie mit einfachen Veränderungen – jeder kleine Fortschritt ist ein Erfolg.</string>
+
+    </resources>

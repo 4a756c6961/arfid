@@ -5,11 +5,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
 import com.example.arfid.ui.theme.ARFIDTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,26 +25,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 
-class AbschnittArfidVerstehen : ComponentActivity() {
+class ScreenArfidVerstehen01 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ARFIDTheme {
-                AbschnittArfidVerstehenScreen(context = this)
+                ScreenArfidVerstehen01(context = this)
             }
         }
     }
 }
 
 @Composable
-fun AbschnittArfidVerstehenScreen(context: Context) {
+fun ScreenArfidVerstehen01 (context: Context) {
     var showVideo by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
@@ -196,7 +193,7 @@ fun AbschnittArfidVerstehenScreen(context: Context) {
 
                         Button(
                             onClick = {
-                                val intent = Intent(context, AbschnittSymptomeErkennen::class.java)
+                                val intent = Intent(context, ScreenArfidVerstehen02::class.java)
                                 context.startActivity(intent)
                             },
                             modifier = Modifier

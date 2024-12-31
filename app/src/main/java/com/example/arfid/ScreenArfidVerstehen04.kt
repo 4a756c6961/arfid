@@ -24,20 +24,22 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
-class AbschnittSymptomeErkennen : ComponentActivity() {
+class ScreenArfidVerstehen04 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ARFIDTheme {
-                AbschnittSymptomeErkennenScreen(context = this)
+                ScreenArfidVerstehen04(context = this)
             }
         }
     }
 }
 
+
 @Composable
-fun AbschnittSymptomeErkennenScreen(context: Context) {
+fun ScreenArfidVerstehen04(context: Context) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -100,14 +102,68 @@ fun AbschnittSymptomeErkennenScreen(context: Context) {
                 )
 
                 Text(
-                    text = stringResource(id = R.string.title_Slide_2),
+                    text = stringResource(id = R.string.title_slide_4),
                     style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.padding(16.dp)
                 )
+
                 Text(
-                    text = stringResource(id = R.string.content_Slide_2),
+                    text = stringResource(id = R.string.content_slide_4_intro),
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(16.dp)
+                )
+
+                Text(
+                    text = stringResource(id = R.string.content_slide_4_bullet_point_1),
+                    style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
+                Text(
+                    text = stringResource(id = R.string.content_slide_4_bullet_point_2),
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(16.dp)
+                )
+                Text(
+                    text = stringResource(id = R.string.content_slide_4_bullet_point_3),
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+
+                Text(
+                    text = stringResource(id = R.string.content_slide_4_Abschluss),
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(16.dp))
+
+
+                Button(
+                    onClick = {
+                     // Platzhalter
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .padding(horizontal = 16.dp, vertical = 16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFEFEFEF),
+                        contentColor = Color(0xFF004D40)
+                    ),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_suche),
+                            contentDescription = "Zur Expertensuche",
+                            modifier = Modifier.size(32.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Zur Experten-Suche",
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp))
+                    }
+                }
             }
 
             Box(
@@ -124,7 +180,7 @@ fun AbschnittSymptomeErkennenScreen(context: Context) {
                 ) {
                     OutlinedButton(
                         onClick = {
-                            val intent = Intent(context, AbschnittArfidVerstehen::class.java)
+                            val intent = Intent(context, ScreenArfidVerstehen03::class.java)
                             context.startActivity(intent)
                         },
                         modifier = Modifier
@@ -142,7 +198,7 @@ fun AbschnittSymptomeErkennenScreen(context: Context) {
 
                     Button(
                         onClick = {
-                            val intent = Intent(context, AbschnittUrsachen::class.java)
+                            val intent = Intent(context, ParentActivity::class.java)
                             context.startActivity(intent)
                         },
                         modifier = Modifier
@@ -153,7 +209,7 @@ fun AbschnittSymptomeErkennenScreen(context: Context) {
                             contentColor = Color.White
                         )
                     ) {
-                        Text("Weiter")
+                        Text("Schließen")
                     }
                 }
             }

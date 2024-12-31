@@ -21,5 +21,6 @@
     <string name="card_kind_headline">Kind oder Jugendlicher</string>
     <string name="card_kind_subheadline">Ich bin selbst von ARFID betroffen.</string>
     <string name="Greeting">Greeting</string>
-
+<!--API-Schlüssel zur Google Cloud Functions-API-->
+    <string name="google_maps_api_key">AIzaSyCNH3Lj_ZgN0anOYx0GdTFsWt5X10X9LR4</string>
 </resources>

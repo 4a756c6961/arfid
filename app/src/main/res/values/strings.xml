@@ -22,5 +22,5 @@
     <string name="card_kind_subheadline">Ich bin selbst von ARFID betroffen.</string>
     <string name="Greeting">Greeting</string>
 <!--API-Schlüssel zur Google Cloud Functions-API-->
-    <string name="google_maps_api_key">AIzaSyCNH3Lj_ZgN0anOYx0GdTFsWt5X10X9LR45Ww4</string>
+    <string name="google_maps_api_key"></string>
 </resources>

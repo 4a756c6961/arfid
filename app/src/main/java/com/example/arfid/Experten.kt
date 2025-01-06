@@ -39,14 +39,23 @@ class ExpertenDaten(private val context: Context) {
                 "Berlin"
             ),
             Experten(
+                "Wolfgang Heisel",
+                "Ernährungsberater",
+                getLocationFromAddress(context, "Zweibrückenstraße 2, München"),
+                "Zweibrückenstraße",
+                "2",
+                "80331",
+                "München"
+            ),
+            Experten(
                 "Dr. Katharina Jung",
-                "Fachärztin für Kinderheilkunde",
-                getLocationFromAddress(context, "Rolandufer 4, Berlin"),
-                "Rolandufer",
-                "4",
-                "10115",
-                "Berlin"
-            )
+            "Fachärztin für Kinderheilkunde",
+            getLocationFromAddress(context, "Hardefuststraße 1, Köln"),
+            "Hardefuststraße",
+            "1",
+            "50677",
+            "Köln"
+        )
         )
     }
 }

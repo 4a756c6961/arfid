@@ -12,7 +12,9 @@ data class Experten(
     val street: String,
     val houseNumber: String,
     val zipCode: String,
-    val city: String
+    val city: String,
+    val telephone: String,
+    val email: String
 )
 
 class ExpertenDaten(private val context: Context) {
@@ -27,7 +29,9 @@ class ExpertenDaten(private val context: Context) {
                 "Deutsche-med-platz",
                 "3",
                 "18057",
-                "Rostock"
+                "Rostock",
+                "0123456789",
+                "h.schmidt@psycho.de"
             ),
             Experten(
                 "Dr. Cordula Weckmann",
@@ -36,7 +40,9 @@ class ExpertenDaten(private val context: Context) {
                 "Rolandufer",
                 "4",
                 "10115",
-                "Berlin"
+                "Berlin",
+                "0123456896",
+                "cordula.weckmann@mvz-psycho.de"
             ),
             Experten(
                 "Wolfgang Heisel",
@@ -45,7 +51,10 @@ class ExpertenDaten(private val context: Context) {
                 "Zweibrückenstraße",
                 "2",
                 "80331",
-                "München"
+                "München",
+                "0123452365",
+                "w.heisel@ernaehrungsexperte.de"
+
             ),
             Experten(
                 "Dr. Katharina Jung",
@@ -54,7 +63,9 @@ class ExpertenDaten(private val context: Context) {
             "Hardefuststraße",
             "1",
             "50677",
-            "Köln"
+            "Köln",
+                "01234521345",
+                "k.jung@kinderheilkunde.de"
         )
         )
     }

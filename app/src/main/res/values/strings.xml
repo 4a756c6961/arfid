@@ -163,4 +163,6 @@
         - Unterstützung suchen: Tauschen Sie sich mit anderen Eltern aus, die Ähnliches erleben.
     </string>
 
+    <string name="google_maps_api_key">my_google_key</string>
+
     </resources>

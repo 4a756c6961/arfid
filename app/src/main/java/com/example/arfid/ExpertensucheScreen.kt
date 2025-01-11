@@ -1,24 +1,162 @@
 package com.example.arfid
 
-
-import androidx.compose.foundation.layout.Box
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults.textFieldColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.arfid.ui.theme.ARFIDTheme
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 
 
+class ExpertensucheScreenActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            ExpertensucheScreen()
+        }
+    }
+}
 @Composable
 fun ExpertensucheScreen() {
-    Box(modifier = Modifier
-        .fillMaxSize(),
-        contentAlignment = Alignment.Center){
-        Text(text = "Experten suchen",
-            fontFamily = FontFamily.SansSerif,
-            fontSize = 30.sp)
+    val context = LocalContext.current
+    val expertRepository = remember { ExpertenDaten(context) }
+
+    var experts by remember { mutableStateOf<List<Experten>>(emptyList()) }
+    var searchQuery by remember { mutableStateOf("") }
+
+    var showDialog by remember { mutableStateOf(false) }
+    var selectedExpert by remember { mutableStateOf<Experten?>(null) }
+
+    LaunchedEffect(true) {
+        experts = expertRepository.getExperten()
     }
 
+    val filteredExperts = experts.filter {
+        it.name.contains(searchQuery, ignoreCase = true) ||
+                it.specialization.contains(searchQuery, ignoreCase = true) ||
+                it.street.contains(searchQuery, ignoreCase = true)
+    }
+
+    // Google Map mit Markern
+    GoogleMap(
+        modifier = Modifier.fillMaxSize(),
+        cameraPositionState = rememberCameraPositionState {
+            position = com.google.android.gms.maps.model.CameraPosition.fromLatLngZoom(
+                filteredExperts.firstOrNull()?.location ?: LatLng(54.0886707, 12.1400211),
+                5f
+            )
+        }
+    ) {
+        filteredExperts.forEach { expert ->
+            Marker(
+                state = MarkerState(position = expert.location),
+                title = expert.name,
+                onClick = {
+                    selectedExpert = expert
+                    showDialog = true
+                    true
+                }
+            )
+        }
+    }
+
+    // AlertDialog für Expertendetails
+    if (showDialog && selectedExpert != null) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text(text = "Details zu ${selectedExpert?.name}") },
+            text = {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text("Fachgebiet: ${selectedExpert?.specialization}")
+                    Text("Adresse: ${selectedExpert?.street} ${selectedExpert?.houseNumber}, ${selectedExpert?.zipCode} ${selectedExpert?.city}")
+                    Text(
+                        "Telefon: ${selectedExpert?.telephone}",
+                        color = Color.Blue,
+                        modifier = Modifier.clickable {
+                            val intent = Intent(Intent.ACTION_DIAL)
+                            intent.data = Uri.parse("tel:${selectedExpert?.telephone}")
+                            context.startActivity(intent)
+                        }
+
+                    )
+                    Text(
+                        "E-Mail: ${selectedExpert?.email}",
+                        color = Color.Blue,
+                        modifier = Modifier.clickable {
+                            val intent = Intent(Intent.ACTION_SENDTO)
+                            intent.data = Uri.parse("mailto:${selectedExpert?.email}")
+                            context.startActivity(intent)
+                        }
+
+
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showDialog = false }) {
+                    Text("Schließen")
+                }
+            }
+        )
+    }
+
+    // Suchleiste
+    SearchBar(
+        query = searchQuery,
+        onQueryChanged = { searchQuery = it }
+    )
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SearchBar(query: String, onQueryChanged: (String) -> Unit) {
+    TextField(
+        value = query,
+        onValueChange = onQueryChanged,
+        placeholder = {
+            Text(text = "Suche Experten...")
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        colors = textFieldColors(
+            focusedIndicatorColor = Color.Blue,
+            unfocusedIndicatorColor = Color.Gray
+        )
+    )
+}
+
+
+@Preview
+@Composable
+fun ExpertensucheScreenPreview() {
+    ARFIDTheme {
+        ExpertensucheScreen()
+    }
 }

@@ -1,28 +1,23 @@
 package com.example.arfid
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,14 +28,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.arfid.ui.theme.ARFIDTheme
-import android.content.Intent
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 
 
 class ParentActivity : ComponentActivity() {
@@ -55,6 +42,7 @@ class ParentActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun ParentScreen() {
     val navController = rememberNavController()
@@ -63,99 +51,43 @@ fun ParentScreen() {
         modifier = Modifier.fillMaxSize(),
         bottomBar = { ParentBottomNavigationBar(navController) }
     ) { innerPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = "home",
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            composable("home") { ParentHomeScreen() }
-            composable("wissen") { WissenScreen() }
-            composable("expertensuche") { ExpertensucheScreen() }
-            composable("forum") { ForumScreen() }
-        }
-    }
-}
+        val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
-@Composable
-fun ParentHomeScreen() {
-    val context = LocalContext.current
-    val scrollState = rememberScrollState()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-            .padding(16.dp)
-    ) {
-        ElevatedCardContent(
-            imageRes = R.drawable.arfid_verstehen,
-            title = stringResource(id = R.string.title_arfid_verstehen),
-            subtitle = stringResource(id = R.string.subtitle_arfid_verstehen),
-            onClick = {
-            val intent = Intent(context, ScreenArfidVerstehen01::class.java)
-            context.startActivity(intent)})
-
-        Spacer(modifier = Modifier.height(16.dp))
-        ElevatedCardContent(
-            imageRes = R.drawable.kind_unterstuetzen,
-            title = stringResource(id = R.string.title_kind_unterstuetzen),
-            subtitle = stringResource(id = R.string.subtitle_kind_unterstuetzen),
-            onClick = {val intent = Intent(context, ScreenKindUnterstuetzen01::class.java)
-                context.startActivity(intent)})
-
-        Spacer(modifier = Modifier.height(16.dp))
-        ElevatedCardContent(
-            imageRes = R.drawable.erfahrungsberichte,
-            title = stringResource(id = R.string.title_erfahrungsberichte),
-            subtitle = stringResource(id = R.string.subtitle_erfahrungsberichte),
-            onClick = {})
-    }
-}
-
-@Composable
-fun ElevatedCardContent(imageRes: Int, onClick: () -> Unit, title: String, subtitle: String ) {
-    ElevatedCard(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 5.dp)
-            .clickable { onClick() },
-        colors = CardDefaults.elevatedCardColors(
-            containerColor = Color(0xFF375E5E)
-        ),
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp)
-    ) {
         Column(
-            modifier = Modifier.padding(0.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
         ) {
-            Image(
-                painter = painterResource(id = imageRes),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(170.dp),
-                contentScale = ContentScale.Crop
-            )
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-            ) {
+            // Begrüßungstext nur anzeigen, wenn die Route "home" ist
+            if (currentRoute == "home") {
                 Text(
-                    text = title,
-                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                    color = Color.White
+                    text = "Willkommen in der App! Hier findest du alle wichtigen Informationen.",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth()
                 )
-                Text(
-                    text = subtitle,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.height(8.dp))
+            }
 
+            // Navigation Host
+            NavHost(
+                navController = navController,
+                startDestination = "home",
+                modifier = Modifier.weight(1f)
+            ) {
+                composable("home") { MainActivity() } // MainActivity als Composable-Content
+                composable("wissen") { WissenScreen() }
+                composable("expertensuche") { ExpertensucheScreen() }
+                composable("forum") { ForumScreen() }
             }
         }
     }
 }
+
+
+
+
 
 @Composable
 fun ParentBottomNavigationBar(navController: NavController) {
@@ -167,18 +99,27 @@ fun ParentBottomNavigationBar(navController: NavController) {
     )
 
     NavigationBar {
+        val context = LocalContext.current
         val currentBackStackEntry = navController.currentBackStackEntryAsState().value
         val currentRoute = currentBackStackEntry?.destination?.route
 
         navItems.forEach { item ->
             NavigationBarItem(
                 selected = currentRoute == item.route,
-                onClick = {
+                onClick = { if (item.route == "home") {
+                    // Intent für MainActivity auslösen
+                    val intent = Intent(context, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    }
+                    context.startActivity(intent)
+                } else {
+                    // Navigation zu einer anderen Route
                     navController.navigate(item.route) {
                         popUpTo(navController.graph.startDestinationId) { saveState = true }
                         launchSingleTop = true
                         restoreState = true
                     }
+                }
                 },
                 icon = {
                     Icon(

@@ -157,7 +157,7 @@ fun SearchBar(query: String, onQueryChanged: (String) -> Unit, onSearchClicked: 
             )
         )
 
-        // Button zum Auslösen der Suche
+        // Button für die Suche
         Button(
             onClick = onSearchClicked,  // Auslösung der Suche
             modifier = Modifier.padding(start = 8.dp)

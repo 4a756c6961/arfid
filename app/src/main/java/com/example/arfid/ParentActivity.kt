@@ -58,7 +58,7 @@ fun ParentScreen() {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            // Begrüßungstext nur anzeigen, wenn die Route "home" ist
+            // Begrüßungstext nur für "home" anzeigen
             if (currentRoute == "home") {
                 Text(
                     text = "Willkommen in der App! Hier findest du alle wichtigen Informationen.",
@@ -70,22 +70,20 @@ fun ParentScreen() {
                 )
             }
 
-            // Navigation Host
+            // NavigationHost
             NavHost(
                 navController = navController,
                 startDestination = "home",
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f) // Restlichen Platz einnehmen
             ) {
-                composable("home") { MainActivity() } // MainActivity als Composable-Content
+                composable("home") { ParentScreen() }
                 composable("wissen") { WissenScreen() }
                 composable("expertensuche") { ExpertensucheScreen() }
-                composable("forum") { ForumScreen() }
+                composable("forum") { ForumScreen(viewModel = ForumViewModel()) }
             }
         }
     }
 }
-
-
 
 
 

@@ -5,14 +5,18 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -45,6 +49,7 @@ class ExpertensucheScreenActivity : ComponentActivity() {
         }
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExpertensucheScreen() {
@@ -131,7 +136,13 @@ fun ExpertensucheScreen() {
                     }
                 },
                 confirmButton = {
-                    TextButton(onClick = { showDialog = false }) {
+                    TextButton(onClick = { showDialog = false },
+                        modifier = Modifier.padding(8.dp), // Add padding if needed
+                        shape = RoundedCornerShape(50), // Makes the button fully rounded
+                        border = BorderStroke(2.dp, Color(0xFFFF7043)), // Border width and color
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = Color(0xFFFF7043) // Text color
+                        )) {
                         Text("Schließen")
                     }
                 }
@@ -150,17 +161,23 @@ fun SearchBar(query: String, onQueryChanged: (String) -> Unit, onSearchClicked: 
             placeholder = {
                 Text(text = "Suche Experten...")
             },
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(1f)
+            .background(Color(0xFFF2EBE6)),
             colors = TextFieldDefaults.textFieldColors(
-                focusedIndicatorColor = Color.Blue,
-                unfocusedIndicatorColor = Color.Gray
+                containerColor = Color(0xFFF2EBE6),
+                focusedIndicatorColor = Color(0xFFE1D7D2),
+                unfocusedIndicatorColor = Color(0xFFF2EBE6)
             )
         )
 
         // Button zum Auslösen der Suche
         Button(
             onClick = onSearchClicked,  // Auslösung der Suche
-            modifier = Modifier.padding(start = 8.dp)
+            modifier = Modifier.padding(start = 8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFFF7350),
+            contentColor = Color.White
+        )
         ) {
             Text(text = "Suchen")
         }

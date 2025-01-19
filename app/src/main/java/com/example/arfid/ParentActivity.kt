@@ -34,10 +34,13 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.arfid.ui.theme.ARFIDTheme
 import android.content.Intent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -65,11 +68,10 @@ fun ParentScreen() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = "home",
+            startDestination = "wissen",
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable("home") { ParentHomeScreen() }
-            composable("wissen") { WissenScreen() }
+            composable("wissen") { ParentHomeScreen() }
             composable("expertensuche") { ExpertensucheScreen() }
             composable("forum") { ForumScreen() }
         }
@@ -83,6 +85,7 @@ fun ParentHomeScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(color = Color(0xFFFFFCFB))
             .verticalScroll(scrollState)
             .padding(16.dp)
     ) {
@@ -166,7 +169,12 @@ fun ParentBottomNavigationBar(navController: NavController) {
         ParentNavItem("forum", "Forum", R.drawable.ic_forum)
     )
 
-    NavigationBar {
+    NavigationBar (
+        modifier = Modifier
+        .border(1.dp, Color.LightGray),
+        containerColor = Color(0xFFFFFCFB),
+        contentColor = Color.Black
+    ) {
         val currentBackStackEntry = navController.currentBackStackEntryAsState().value
         val currentRoute = currentBackStackEntry?.destination?.route
 
@@ -187,7 +195,12 @@ fun ParentBottomNavigationBar(navController: NavController) {
                         modifier = Modifier.size(24.dp)
                     )
                 },
-                label = { Text(text = item.label) }
+                label = { Text(text = item.label) },
+
+                        colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = Color(0xFFF2EBE6)
+                        )
+
             )
         }
     }

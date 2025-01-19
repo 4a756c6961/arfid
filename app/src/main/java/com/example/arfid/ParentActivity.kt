@@ -64,7 +64,8 @@ fun ParentScreen() {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        bottomBar = { ParentBottomNavigationBar(navController) }
+        bottomBar = { ParentBottomNavigationBar(navController)
+        }
     ) { innerPadding ->
         NavHost(
             navController = navController,
@@ -165,7 +166,7 @@ fun ParentBottomNavigationBar(navController: NavController) {
     val navItems = listOf(
         ParentNavItem("home", "Home", R.drawable.ic_home),
         ParentNavItem("wissen", "Wissen", R.drawable.ic_wissen),
-        ParentNavItem("expertensuche", "Experten", R.drawable.ic_suche),
+        ParentNavItem("expertensuche", "Expertensuche", R.drawable.ic_suche),
         ParentNavItem("forum", "Forum", R.drawable.ic_forum)
     )
 
